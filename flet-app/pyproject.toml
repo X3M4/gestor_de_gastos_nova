@@ -1,0 +1,16 @@
+[tool]
+name = "flet-app"
+version = "0.1.0"
+description = "A multiplatform application built with Flet."
+authors = ["Your Name <youremail@example.com>"]
+license = "MIT"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+dependencies = [
+    "flet",
+    # Add other dependencies here
+]
