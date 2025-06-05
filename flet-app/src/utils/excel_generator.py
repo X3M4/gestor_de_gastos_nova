@@ -41,7 +41,7 @@ class ExcelGenerator:
             # Get month and year from first record
             if employee_data:
                 first_date = datetime.strptime(employee_data[0]['fecha'], '%d/%m/%Y')
-                month_name = first_date.strftime('%B').upper()
+                month_name = self.months_to_spanish(first_date.strftime('%B'))
                 year = first_date.year
                 month_num = first_date.month
             else:
@@ -111,7 +111,7 @@ class ExcelGenerator:
         
         # Header section
         ws['A1'] = 'MES'
-        ws['C1'] = month_name
+        ws['C1'] = month_name.upper()
         ws['E1'] = 'AÑO'
         ws['F1'] = year
         
@@ -256,3 +256,21 @@ class ExcelGenerator:
         column_widths = [8, 12, 15, 12, 8, 12, 30, 15]
         for i, width in enumerate(column_widths, 1):
             ws.column_dimensions[chr(64 + i)].width = width
+            
+    def months_to_spanish(self, month: str) -> str:
+        """Convert English month name to Spanish"""
+        months = {
+            'January': 'Enero',
+            'February': 'Febrero',
+            'March': 'Marzo',
+            'April': 'Abril',
+            'May': 'Mayo',
+            'June': 'Junio',
+            'July': 'Julio',
+            'August': 'Agosto',
+            'September': 'Septiembre',
+            'October': 'Octubre',
+            'November': 'Noviembre',
+            'December': 'Diciembre'
+        }
+        return months.get(month, month)
